@@ -7,12 +7,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'mysecret' // TODO: store this secr
 
 export default {
   Query: {
-    me: (_parent: void, _args: void, ctx: Context): Promise<User | null> =>
-      ctx.db.collection('users').findOne({ _id: ctx.userId }),
+    me: async (_parent: void, _args: void, ctx: Context): Promise<User | undefined> =>
+      ctx.userId ? ctx.dataSources.users.findOneById(ctx.userId) : undefined
   },
   Mutation: {
     login: async (_parent: void, args: LoginPayload, ctx: Context): Promise<AuthPayload> => {
-      const user = await ctx.db.collection('users').findOne({ username: args.username })
+      const user = await ctx.dataSources.users.findOne({ username: args.username })
       if (!user) throw new AuthenticationError('User does not exist')
     
       const passwordIsValid = await bcrypt.compare(args.password, user.hashedPassword)
@@ -23,18 +23,18 @@ export default {
       return { token }
     },
     signup: async (_parent: void, args: SignupPayload, ctx: Context): Promise<AuthPayload> => {
-      const existingUser = await ctx.db.collection('users').findOne({ username: args.username })
+      const existingUser = await ctx.dataSources.users.findOne({ username: args.username })
       if (existingUser) {
         throw new Error('User already exists!')
       }
     
       const hashedPassword = await bcrypt.hash(args.password, 10)
-      const result = await ctx.db.collection<User>('users').insertOne({
+      const result = await ctx.dataSources.users.insert({
         username: args.username,
         hashedPassword
       })
     
-      const token = jwt.sign({ id: result.insertedId }, JWT_SECRET)
+      const token = jwt.sign({ id: result._id }, JWT_SECRET)
     
       return { token }
     }

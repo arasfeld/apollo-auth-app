@@ -1,14 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["dom","esnext"],
-    "outDir": "dist",
-    "rootDir": "src",
-    "removeComments": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }
+  "files": [],
+  "references": [
+    { "path": "packages/api" },
+    { "path": "packages/web" },
+  ]
 }

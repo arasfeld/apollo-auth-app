@@ -1,0 +1,23 @@
+{
+  "name": "@arasfeld/web",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "Adam Rasfeld",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.3.6",
+    "graphql": "^15.4.0",
+    "next": "10.0.3",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.2",
+    "@types/react": "17.0.0"
+  }
+}
