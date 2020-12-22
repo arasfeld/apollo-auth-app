@@ -1,4 +1,6 @@
-import { gql, useQuery } from '@apollo/client'
+import { ApolloQueryResult, gql, useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 type User = {
   username: string
@@ -11,6 +13,7 @@ interface MeData {
 interface AuthResult {
   error: string,
   loading: boolean,
+  refetch: () => Promise<ApolloQueryResult<MeData>>,
   user?: User
 }
 
@@ -22,11 +25,31 @@ const ME_QUERY = gql`
   }
 `
 
-export const useAuth = (): AuthResult => {
-  const { data, error, loading } = useQuery<MeData>(ME_QUERY)
+interface Props {
+  redirectTo?: string
+  redirectIfFound?: boolean
+}
+
+export const useAuth = ({ redirectTo, redirectIfFound }: Props = {}): AuthResult => {
+  const { data, error, loading, refetch } = useQuery<MeData>(ME_QUERY)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!redirectTo || loading) return
+    if (
+      // If redirectTo is set, redirect if the user was not found.
+      (redirectTo && !redirectIfFound && !data?.me) ||
+      // If redirectIfFound is also set, redirect if the user was found
+      (redirectIfFound && data?.me)
+    ) {
+      router.push(redirectTo)
+    }
+  }, [data, loading, redirectTo, redirectIfFound, router])
+
   return {
     error: error?.message,
     loading,
-    user: data?.me
+    refetch,
+    user: data?.me,
   }
 }

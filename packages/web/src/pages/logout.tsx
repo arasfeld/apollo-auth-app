@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/client'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
-const SignOut: React.FC = () => {
+const Logout: React.FC = () => {
   const client = useApolloClient()
   const router = useRouter()
   
@@ -13,7 +13,7 @@ const SignOut: React.FC = () => {
     })
   }, [client, router])
 
-  return <div>Signing out...</div>
+  return <div>Logging out...</div>
 }
 
-export default SignOut
+export default Logout
