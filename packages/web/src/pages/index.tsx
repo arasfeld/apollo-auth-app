@@ -1,21 +1,19 @@
-import Head from 'next/head'
 import React from 'react'
-import { useAuth } from '../lib/use-auth'
-import styles from '../styles/Home.module.css'
+import { useAuth } from '../context/auth-context'
 
 const Home: React.FC = () => {
   const { user } = useAuth()
   return (
-    <React.Fragment>
-      <h1 className={styles.title}>
+    <div className="container px-8 pt-24 pb-24 mx-auto lg:px-4">
+      <h1>
         {!user ? "You're logged out." : `Welcome ${user.username}`}
       </h1>
 
-      <p className={styles.description}>
+      <p>
         Get started by editing{' '}
-        <code className={styles.code}>pages/index.js</code>
+        <code>pages/index.js</code>
       </p>
-    </React.Fragment>
+    </div>
   )
 }
 

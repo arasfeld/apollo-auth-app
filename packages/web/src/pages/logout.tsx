@@ -1,17 +1,16 @@
-import { useApolloClient } from '@apollo/client'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
+import { useAuth } from '../context/auth-context'
 
 const Logout: React.FC = () => {
-  const client = useApolloClient()
+  const { logout } = useAuth()
   const router = useRouter()
   
   useEffect(() => {
-    localStorage.removeItem('token')
-    client.resetStore().then(() => {
+    logout().then(() => {
       router.push('/')
     })
-  }, [client, router])
+  }, [logout, router])
 
   return <div>Logging out...</div>
 }

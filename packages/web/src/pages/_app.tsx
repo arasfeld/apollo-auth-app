@@ -1,16 +1,19 @@
 import { ApolloProvider } from '@apollo/client'
 import type { AppProps } from 'next/app'
 import React from 'react'
-import Layout from '../components/layout'
-import apolloClient from '../lib/apollo-client'
-import '../styles/globals.css'
+import { Layout } from '../components'
+import { AuthProvider } from '../context/auth-provider'
+import { apolloClient } from '../utils/apollo-client'
+import '../styles/index.css'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
     </ApolloProvider>
   )
 }

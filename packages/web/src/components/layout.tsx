@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import React from 'react'
-import Header from './header'
+import { Header } from './header'
 
-const Layout: React.FC = ({ children }) => (
+export const Layout: React.FC = ({ children }) => (
   <div>
     <Head>
       <title>Create Next App</title>
@@ -16,5 +16,3 @@ const Layout: React.FC = ({ children }) => (
     </main>
   </div>
 )
-
-export default Layout
