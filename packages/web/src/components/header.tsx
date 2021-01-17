@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useAuth } from '../context/auth-context'
+import { ThemeToggle } from './theme-toggle'
 
 interface NavLink {
   href: string
@@ -40,6 +41,7 @@ export const Header: React.FC = () => {
             ))}
           </ul>
         </nav>
+        <ThemeToggle />
         {user && (
           <div className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
