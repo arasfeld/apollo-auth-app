@@ -9,6 +9,11 @@ export const ThemeProvider: React.FC = ({ children }) => {
     const newTheme = theme === Theme.Light ? Theme.Dark : Theme.Light
     setTheme(newTheme)
     setThemeInLocalStorage(newTheme)
+    if (newTheme === Theme.Light) {
+      document.querySelector('html').classList.remove('dark')
+    } else {
+      document.querySelector('html').classList.add('dark')
+    }
   }, [theme])
 
   const value = useMemo(() => ({

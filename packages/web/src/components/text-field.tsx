@@ -5,10 +5,10 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const TextField: React.FC<Props> = ({ label, ...rest }) => (
-  <label className="text-sm leading-7 text-gray-600">
+  <label className="text-sm leading-7 text-gray-700 dark:text-gray-400">
       {label}
       <input
-        className="w-full px-4 py-2 mb-4 mr-4 text-base bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"
+        className="w-full px-4 py-2 mb-4 mr-4 bg-gray-100 dark:bg-gray-800 border-transparent rounded-lg text-base focus:ring-0"
         type="text"
         {...rest}
       />

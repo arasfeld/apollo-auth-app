@@ -1,7 +1,12 @@
 {
-  "files": [],
-  "references": [
-    { "path": "packages/api" },
-    { "path": "packages/web" },
-  ]
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["packages/*/src"]
+    },
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": []
+  }
 }

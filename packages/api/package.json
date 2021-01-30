@@ -1,13 +1,17 @@
 {
-  "name": "@arasfeld/api",
+  "name": "@app/api",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts,graphql --inspect"
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rm -rf node_modules dist",
+    "start": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts,graphql --inspect",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Adam Rasfeld",
-  "license": "ISC",
   "dependencies": {
     "apollo-datasource": "^0.7.2",
     "apollo-server-caching": "^0.5.2",

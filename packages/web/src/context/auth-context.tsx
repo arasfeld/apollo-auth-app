@@ -11,7 +11,11 @@ interface AuthContextInterface {
   user?: User
 }
 
-export const AuthContext = createContext<AuthContextInterface>(null)
+export const AuthContext = createContext<AuthContextInterface>({
+  login: () => Promise.resolve(),
+  logout: () => Promise.resolve(),
+  signup: () => Promise.resolve(),
+})
 
 export const useAuth = (): AuthContextInterface => {
   const context = useContext(AuthContext)

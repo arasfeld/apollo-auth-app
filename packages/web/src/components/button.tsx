@@ -2,7 +2,7 @@ import React from 'react'
 
 enum ButtonColor {
   Primary = 'primary',
-  Accent = 'accent'
+  Accent = 'accent',
 }
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
