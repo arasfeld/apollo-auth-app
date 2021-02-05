@@ -1,21 +1,45 @@
 {
+  "name": "next-graphql-app",
+  "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "build": "yarn workspaces run build",
-    "clean": "rm -rf node_modules dist && yarn workspaces run clean",
-    "lint": "eslint . --ext .ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:api": "yarn workspace @app/api dev",
-    "start:web": "yarn workspace @app/web dev"
+    "build": "npm run generate && next build",
+    "dev": "next dev",
+    "generate": "npm run generate:prisma && npm run generate:nexus && npm run generate:codegen",
+    "generate:codegen": "graphql-codegen --config codegen.yml",
+    "generate:nexus": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only src/graphql/schema",
+    "generate:prisma": "prisma generate",
+    "migrate": "prisma migrate dev --preview-feature",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "@hapi/iron": "^6.0.0",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@prisma/client": "^2.16.0",
+    "apollo-server-micro": "^2.19.2",
+    "clsx": "^1.1.1",
+    "cookie": "^0.4.1",
+    "deepmerge": "^4.2.2",
+    "graphql": "^15.5.0",
+    "graphql-scalars": "^1.7.0",
+    "next": "10.0.6",
+    "nexus": "^1.0.0",
+    "nexus-plugin-prisma": "^0.30.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@graphql-codegen/add": "^2.0.2",
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/typescript": "^1.20.2",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.1",
+    "@prisma/cli": "^2.16.0",
+    "@types/cookie": "^0.4.0",
     "@types/node": "^14.14.22",
-    "@typescript-eslint/eslint-plugin": "^4.14.0",
-    "@typescript-eslint/parser": "^4.14.0",
-    "eslint": "^7.18.0",
+    "@types/react": "^17.0.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   }
