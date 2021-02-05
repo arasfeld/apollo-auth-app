@@ -1,12 +1,9 @@
-version: "3.1"
-
+version: "3.9"
 services:
-  db:
-    image: mongo:latest
+  postgres:
+    image: postgres
     restart: always
+    env_file:
+      - ./.env
     volumes:
-      - ./mongodb:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=apollo-auth-app
-    ports:
-      - 27017:27017
+      - ./postgres:/var/lib/postgresql/data
