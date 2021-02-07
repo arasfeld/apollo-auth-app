@@ -5,6 +5,7 @@ import {
   LoginInput,
   RegisterInput,
   useLoginMutation,
+  useLogoutMutation,
   useMeQuery,
   useRegisterMutation
 } from '../graphql/types'
@@ -13,6 +14,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const apolloClient = useApolloClient()
   const { data: meData, refetch } = useMeQuery()
   const [loginMutation] = useLoginMutation()
+  const [logoutMutation] = useLogoutMutation()
   const [registerMutation] = useRegisterMutation()
 
   const login = useCallback(async (input: LoginInput) => {
@@ -26,7 +28,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, [apolloClient, loginMutation, refetch])
 
   const logout = useCallback(async () => {
-    localStorage.removeItem('token')
+    await logoutMutation()
     await apolloClient.resetStore()
   }, [apolloClient])
 

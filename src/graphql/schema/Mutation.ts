@@ -1,12 +1,8 @@
 import { AuthenticationError } from 'apollo-server-core'
 import { arg, inputObjectType, mutationType, objectType } from 'nexus'
+import { hashPassword, validatePassword } from '../../auth/password'
+import { clearLoginSession, setLoginSession } from '../../auth/session'
 import { User } from './User'
-import {
-  hashPassword,
-  removeTokenCookie,
-  setLoginSession,
-  validatePassword
-} from '../../auth'
 
 export const AuthResponse = objectType({
   name: 'AuthResponse',
@@ -77,7 +73,7 @@ export const Mutation = mutationType({
     }),
     t.boolean('logout', {
       resolve(_root, _args, ctx) {
-        removeTokenCookie(ctx.res)
+        clearLoginSession(ctx.res)
         return true
       }
     })

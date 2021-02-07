@@ -1,3 +1,4 @@
-import OneDarkTheme from './one-dark'
+import DarkTheme from './dark'
+// import LightTheme from './light'
 
-export default OneDarkTheme
+export default DarkTheme

@@ -1,6 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Iron from '@hapi/iron'
-import { MAX_AGE, setTokenCookie, getTokenCookie } from './cookies'
+import { serialize } from 'cookie'
+
+const SECOND = 1
+const MINUTE = SECOND * 60
+const HOUR = MINUTE * 60
+const DAY = HOUR * 24
+
+const MAX_AGE = DAY * 3
+const SECRET = process.env.SECRET
+const TOKEN_NAME = 'token'
 
 export type Session = {
   id: number
@@ -8,18 +17,25 @@ export type Session = {
   maxAge: number
 }
 
-const SECRET = process.env.SECRET
-
 export const setLoginSession = async (res: NextApiResponse, id: number): Promise<void> => {
   // Create a session object with a max age that we can validate later
   const obj = { id, createdAt: Date.now(), maxAge: MAX_AGE }
   const token = await Iron.seal(obj, SECRET, Iron.defaults)
 
-  setTokenCookie(res, token)
+  const cookie = serialize(TOKEN_NAME, token, {
+    maxAge: MAX_AGE,
+    expires: new Date(Date.now() + MAX_AGE * 1000),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+    sameSite: 'lax',
+  })
+
+  res.setHeader('Set-Cookie', cookie)
 }
 
 export const getLoginSession = async (req: NextApiRequest): Promise<Session | null> => {
-  const token = getTokenCookie(req)
+  const token = req.cookies[TOKEN_NAME]
   if (!token) return null
 
   const session: Session = await Iron.unseal(token, SECRET, Iron.defaults)
@@ -31,4 +47,13 @@ export const getLoginSession = async (req: NextApiRequest): Promise<Session | nu
   }
 
   return session
+}
+
+export const clearLoginSession = (res: NextApiResponse): void => {
+  const cookie = serialize(TOKEN_NAME, '', {
+    maxAge: -1,
+    path: '/',
+  })
+
+  res.setHeader('Set-Cookie', cookie)
 }
