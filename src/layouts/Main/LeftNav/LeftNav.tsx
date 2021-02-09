@@ -4,28 +4,8 @@ import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import Paper from '@material-ui/core/Paper'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import { Navigation } from '../../components'
+import { Navigation } from '../../../components'
 import links from './links'
-
-const drawerWidth = 240
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      height: '100%',
-      overflowY: 'auto',
-    },
-    content: {
-      padding: theme.spacing(2),
-    },
-    drawer: {
-      [theme.breakpoints.up('sm')]: {
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-    },
-  })
-)
 
 interface Props {
   className?: string 
@@ -78,5 +58,23 @@ const LeftNav: React.FC<Props> = ({ className, onMobileClose, openMobile }) => {
     </>
   )
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      height: '100%',
+      overflowY: 'auto',
+    },
+    content: {
+      padding: theme.spacing(2),
+    },
+    drawer: {
+      [theme.breakpoints.up('sm')]: {
+        width: 240,
+        flexShrink: 0,
+      },
+    },
+  })
+)
 
 export default LeftNav

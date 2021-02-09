@@ -10,8 +10,9 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { useAuth } from '../auth/auth-context'
+import AuthLayout from '../layouts/Auth'
 
-export default function Register() {
+const Register = () => {
   const { register } = useAuth()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -105,6 +106,8 @@ export default function Register() {
   )
 }
 
+Register.Layout = AuthLayout
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -118,3 +121,5 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+export default Register

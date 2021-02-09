@@ -10,8 +10,9 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { useAuth } from '../auth/auth-context'
+import AuthLayout from '../layouts/Auth'
 
-export default function Login() {
+const Login = () => {
   const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -84,6 +85,8 @@ export default function Login() {
   )
 }
 
+Login.Layout = AuthLayout
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     submit: {
@@ -91,3 +94,5 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+export default Login

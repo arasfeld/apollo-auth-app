@@ -5,8 +5,9 @@ import CardContent from '@material-ui/core/CardContent'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import AuthLayout from '../layouts/Auth'
 
-export default function ForgotPassword() {
+const ForgotPassword = () => {
   const [email, setEmail] = useState('')
   const classes = useStyles()
 
@@ -47,6 +48,8 @@ export default function ForgotPassword() {
   )
 }
 
+ForgotPassword.Layout = AuthLayout
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     submit: {
@@ -54,3 +57,5 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+export default ForgotPassword

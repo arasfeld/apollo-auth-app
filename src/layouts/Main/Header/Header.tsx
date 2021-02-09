@@ -17,7 +17,7 @@ const Header: React.FC<Props> = ({ className, toggleMobileNav }) => {
   const classes = useStyles()
 
   return (
-    <AppBar className={clsx(classes.root, className)}>
+    <AppBar color="inherit" className={clsx(classes.root, className)}>
       <Toolbar>
         <IconButton
           aria-label="open drawer"
