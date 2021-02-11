@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Auth: React.FC = ({ children }) => {
   const classes = useStyles()
   return (
-    <Container maxWidth="xs" className={classes.root}>
+    <Container className={classes.root} maxWidth="xs">
       <Box display="flex" justifyContent="center" mb={8}>
         <Logo />
       </Box>
