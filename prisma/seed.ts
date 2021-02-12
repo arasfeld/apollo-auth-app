@@ -1,18 +1,27 @@
 import { PrismaClient } from '@prisma/client'
+import { hashPassword } from '../src/auth/password'
+
+const prisma = new PrismaClient()
 
 async function seed() {
-  const prisma = new PrismaClient()
-
-  // create admin user
   const adminUser = await prisma.user.create({
     data: {
       email: 'admin@test.com',
       firstName: 'Admin',
       lastName: 'User',
-      hashedPassword: 'password', // TODO: hash this
+      hashedPassword: hashPassword('password'),
       role: 'ADMIN'
     }
   })
 
-  console.log('user:', adminUser)
+  console.log({ adminUser })
 }
+
+seed()
+  .catch(e => {
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })

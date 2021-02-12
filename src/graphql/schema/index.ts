@@ -1,19 +1,12 @@
-import { GraphQLDate } from 'graphql-scalars'
-import { decorateType, makeSchema } from 'nexus'
+import { makeSchema } from 'nexus'
 import { nexusPrisma } from 'nexus-plugin-prisma'
 import path from 'path'
 import * as MutationTypes from './Mutation'
 import * as QueryTypes from './Query'
 import * as UserTypes from './User'
 
-export const GQLDate = decorateType(GraphQLDate, {
-  sourceType: 'Date',
-  asNexusMethod: 'date',
-})
-
 const schema = makeSchema({
   types: [
-    GQLDate,
     MutationTypes,
     QueryTypes,
     UserTypes,
