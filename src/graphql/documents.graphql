@@ -29,5 +29,6 @@ fragment userInfo on User {
   email
   firstName
   lastName
-  role
+  isVerified
+  isAdmin
 }

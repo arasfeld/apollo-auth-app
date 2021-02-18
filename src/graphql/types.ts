@@ -12,8 +12,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any;
   DateTime: any;
 };
 
@@ -21,7 +19,6 @@ export type AuthResponse = {
   __typename?: 'AuthResponse';
   user: Maybe<User>;
 };
-
 
 
 export type LoginInput = {
@@ -58,19 +55,15 @@ export type RegisterInput = {
   password: Scalars['String'];
 };
 
-export enum Role {
-  Admin = 'ADMIN',
-  User = 'USER'
-}
-
 export type User = {
   __typename?: 'User';
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   id: Scalars['Int'];
+  isAdmin: Scalars['Boolean'];
+  isVerified: Scalars['Boolean'];
   lastName: Scalars['String'];
-  role: Role;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -131,7 +124,7 @@ export type RegisterMutation = (
 
 export type UserInfoFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'firstName' | 'lastName' | 'role'>
+  & Pick<User, 'id' | 'email' | 'firstName' | 'lastName' | 'isVerified' | 'isAdmin'>
 );
 
 export const UserInfoFragmentDoc = gql`
@@ -140,7 +133,8 @@ export const UserInfoFragmentDoc = gql`
   email
   firstName
   lastName
-  role
+  isVerified
+  isAdmin
 }
     `;
 export const LoginDocument = gql`

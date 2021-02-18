@@ -10,15 +10,31 @@ datasource db {
 model User {
   id             Int      @id @default(autoincrement())
   email          String   @unique
-  firstName      String
-  lastName       String
-  hashedPassword String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  role           Role     @default(USER)
+  firstName      String   @map(name: "first_name")
+  lastName       String   @map(name: "last_name")
+  isVerified     Boolean  @default(false)
+  isAdmin        Boolean  @default(false)
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  updatedAt      DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "users")
 }
 
-enum Role {
-  USER
-  ADMIN
+model UserSecrets {
+  userId                          Int       @id @map(name: "user_id")
+  passwordHash                    String    @map(name: "password_hash")
+  lastLoginAt                     DateTime  @default(now()) @map(name: "last_login_at")
+  failedPasswordAttempts          Int       @default(0) @map(name: "failed_password_attempts")
+  firstFailedPasswordAttempt      DateTime? @map(name: "first_failed_password_attempt")
+  resetPasswordToken              String?   @map(name: "reset_password_token")
+  resetPasswordTokenGenerated     DateTime? @map(name: "reset_password_token_generated")
+  failedResetPasswordAttempts     Int       @default(0) @map(name: "failed_reset_password_attempts")
+  firstFailedResetPasswordAttempt DateTime? @map(name: "first_failed_reset_password_attempt")
+  verifyEmailToken                String?   @map(name: "verify_email_token")
+  verifyEmailTokenGenerated       DateTime? @map(name: "verify_email_token_generated")
+  deleteAccountToken              String?   @map(name: "delete_account_token")
+  deleteAccountTokenGenerated     DateTime? @map(name: "delete_account_token_generated")
+  User                            User      @relation(fields: [userId], references: [id])
+
+  @@map(name: "user_secrets")
 }

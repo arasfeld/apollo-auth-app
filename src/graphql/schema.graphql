@@ -14,9 +14,9 @@ input LoginInput {
 }
 
 type Mutation {
-  login(input: LoginInput): AuthResponse
+  login(input: LoginInput!): AuthResponse
   logout: Boolean
-  register(input: RegisterInput): AuthResponse
+  register(input: RegisterInput!): AuthResponse
 }
 
 type Query {
@@ -30,17 +30,13 @@ input RegisterInput {
   password: String!
 }
 
-enum Role {
-  ADMIN
-  USER
-}
-
 type User {
   createdAt: DateTime!
   email: String!
   firstName: String!
   id: Int!
+  isAdmin: Boolean!
+  isVerified: Boolean!
   lastName: String!
-  role: Role!
   updatedAt: DateTime!
 }

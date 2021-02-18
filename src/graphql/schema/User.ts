@@ -7,8 +7,9 @@ export const User = objectType({
     t.model.email()
     t.model.firstName()
     t.model.lastName()
+    t.model.isVerified()
+    t.model.isAdmin()
     t.model.createdAt()
     t.model.updatedAt()
-    t.model.role()
   },
 })

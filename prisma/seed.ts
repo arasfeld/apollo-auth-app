@@ -9,12 +9,19 @@ async function seed() {
       email: 'admin@test.com',
       firstName: 'Admin',
       lastName: 'User',
-      hashedPassword: hashPassword('password'),
-      role: 'ADMIN'
+      isAdmin: true,
+      isVerified: true,
     }
   })
 
-  console.log({ adminUser })
+  const adminUserSecrets = await prisma.userSecrets.create({
+    data: {
+      userId: adminUser.id,
+      passwordHash: hashPassword('password123')
+    }
+  })
+
+  console.log({ adminUser, adminUserSecrets })
 }
 
 seed()
