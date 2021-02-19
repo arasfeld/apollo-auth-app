@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
-import { getLoginSession, Session } from '../auth/session'
+import { getLoginSession, Session } from '../lib/session'
 
 export type Context = {
   prisma: PrismaClient

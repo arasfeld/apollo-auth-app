@@ -9,7 +9,7 @@ import Link from '@material-ui/core/Link'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import { useAuth } from '../auth/auth-context'
+import { useAuth } from '../lib/auth-context'
 import AuthLayout from '../layouts/Auth'
 
 const Register = () => {

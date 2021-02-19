@@ -10,7 +10,7 @@ import Popper from '@material-ui/core/Popper'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
-import { useAuth } from '../../../auth/auth-context'
+import { useAuth } from '../../../lib/auth-context'
 
 const AuthHeaderItem: React.FC = () => {
   const [open, setOpen] = React.useState(false)

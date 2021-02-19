@@ -1,6 +1,6 @@
 import { arg, inputObjectType, mutationType, nonNull, objectType } from 'nexus'
-import { hashPassword, validatePassword } from '../../auth/password'
-import { clearLoginSession, setLoginSession } from '../../auth/session'
+import { hashPassword, validatePassword } from '../../lib/password'
+import { clearLoginSession, setLoginSession } from '../../lib/session'
 import { User } from './User'
 
 export const AuthResponse = objectType({

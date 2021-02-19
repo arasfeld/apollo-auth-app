@@ -13,7 +13,7 @@ const schema = makeSchema({
   ],
   plugins: [nexusPrisma({ experimentalCRUD: true })],
   outputs: {
-    schema: path.join(process.cwd(), 'src/graphql/schema.graphql'),
+    schema: path.join(process.cwd(), 'graphql/schema.graphql'),
     typegen: path.join(process.cwd(), 'node_modules/@types/nexus-typegen/index.d.ts'),
   },
   sourceTypes: {
@@ -23,7 +23,7 @@ const schema = makeSchema({
     }],
   },
   contextType: {
-    module: path.join(process.cwd(), 'src/graphql/context.ts'),
+    module: path.join(process.cwd(), 'graphql/context.ts'),
     export: 'Context',
   },
 })

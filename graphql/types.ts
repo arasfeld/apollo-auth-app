@@ -35,12 +35,12 @@ export type Mutation = {
 
 
 export type MutationLoginArgs = {
-  input?: Maybe<LoginInput>;
+  input: LoginInput;
 };
 
 
 export type MutationRegisterArgs = {
-  input?: Maybe<RegisterInput>;
+  input: RegisterInput;
 };
 
 export type Query = {

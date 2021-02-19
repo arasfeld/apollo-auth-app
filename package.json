@@ -7,7 +7,7 @@
     "dev": "next dev",
     "generate": "npm run generate:prisma && npm run generate:nexus && npm run generate:codegen",
     "generate:codegen": "graphql-codegen --config codegen.yml",
-    "generate:nexus": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only src/graphql/schema",
+    "generate:nexus": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only graphql/schema",
     "generate:prisma": "prisma generate",
     "migrate": "prisma migrate dev --preview-feature",
     "start": "next start"
@@ -25,7 +25,7 @@
     "graphql": "^15.5.0",
     "next": "10.0.7",
     "nexus": "^1.0.0",
-    "nexus-plugin-prisma": "^0.30.0",
+    "nexus-plugin-prisma": "^0.31.0",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   },

@@ -4,10 +4,10 @@ import Head from 'next/head'
 import { ApolloProvider } from '@apollo/client'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
-import { AuthProvider } from '../auth/auth-provider'
 import { useApollo } from '../graphql/client'
 import MainLayout from '../layouts/Main'
-import theme from '../theme'
+import { AuthProvider } from '../lib/auth-context'
+import theme from '../lib/theme'
 
 function MyApp({ Component, pageProps }: AppLayoutProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
