@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useMemo } from 'react'
 import {
   LoginInput,
   RegisterInput,
-  UserInfoFragment,
+  UserProfileFragment,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
@@ -14,7 +14,7 @@ interface AuthContextInterface {
   login: (input: LoginInput) => Promise<void>
   logout: () => Promise<void>
   register: (input: RegisterInput) => Promise<void>
-  user?: UserInfoFragment
+  user?: UserProfileFragment
 }
 
 export const AuthContext = createContext<AuthContextInterface>({

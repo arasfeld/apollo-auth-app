@@ -17,6 +17,7 @@ type Mutation {
   login(input: LoginInput!): AuthResponse
   logout: Boolean
   register(input: RegisterInput!): AuthResponse
+  updateUser(input: UpdateUserInput!): AuthResponse
 }
 
 type Query {
@@ -28,6 +29,12 @@ input RegisterInput {
   firstName: String!
   lastName: String!
   password: String!
+}
+
+input UpdateUserInput {
+  email: String!
+  firstName: String!
+  lastName: String!
 }
 
 type User {

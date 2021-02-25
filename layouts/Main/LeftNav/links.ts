@@ -12,7 +12,7 @@ export default [
       },
       {
         title: 'Profile',
-        href: '/me',
+        href: '/profile',
         icon: AccountCircleIcon,
       }
     ]

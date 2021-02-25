@@ -28,6 +28,15 @@ export const RegisterInput = inputObjectType({
   }
 })
 
+export const UpdateUserInput = inputObjectType({
+  name: 'UpdateUserInput',
+  definition(t) {
+    t.nonNull.string('email')
+    t.nonNull.string('firstName')
+    t.nonNull.string('lastName')
+  }
+})
+
 const LOGIN_ATTEMPT_WINDOW_DURATION_MS = 100 * 60 * 5 // 5 minutes
 
 export const Mutation = mutationType({
@@ -123,6 +132,23 @@ export const Mutation = mutationType({
       resolve(_root, _args, ctx) {
         clearLoginSession(ctx.res)
         return true
+      }
+    }),
+    t.field('updateUser', {
+      type: AuthResponse,
+      args: { input: nonNull(arg({ type: UpdateUserInput })) },
+      async resolve(_root,  { input }, ctx) {
+        if (!ctx.session.id) {
+          throw new Error('You are not logged in')
+        }
+        const user = await ctx.prisma.user.update({
+          where: {id: ctx.session.id },
+          data: {
+            firstName: input.firstName,
+            lastName: input.lastName,
+          }
+        })
+        return { user }
       }
     })
   },
